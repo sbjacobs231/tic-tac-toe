@@ -119,8 +119,12 @@
 				$('.message').html('Winner');
 				if (array === oMoves) {
 					$('#finish').addClass('screen-win-one');
+					$('#finish').removeClass('screen-win-two');
+					$('#finish').removeClass('screen-win-tie');
 				} else if (array === xMoves) {
 					$('#finish').addClass('screen-win-two');
+					$('#finish').removeClass('screen-win-one');
+					$('#finish').removeClass('screen-win-tie')
 				}
 			}
 		}
@@ -130,6 +134,8 @@
 			$('.board').hide();
 			$('#finish').show();
 			$('#finish').addClass('screen-win-tie');
+			$('#finish').removeClass('screen-win-one');
+			$('#finish').removeClass('screen-win-two')
 			$('.message').html("It's a Tie!");
 		}
 	}
