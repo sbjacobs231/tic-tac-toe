@@ -110,34 +110,43 @@
 	/* -------------- Determining Winner ------------ */
 	function determineWinner(array) {
 		array.sort();
+		var winner = false;
 		for (var i = 0; i < winningCombinations.length; i++) {
-			// All boxes are filled and there is no winner
-			if (turn === 10 && array.indexOf(winningCombinations[i][0]) === -1 && array.indexOf(winningCombinations[i][1]) === -1 && array.indexOf(winningCombinations[i][2]) === -1) {
-				// It's a tie
-				$('.board').hide();
-				$('#finish').show();
-				$('#finish').addClass('screen-win-tie');
-				$('#finish').removeClass('screen-win-one');
-				$('#finish').removeClass('screen-win-two')
-				$('.message').html("It's a Tie!");
-			}
 			// when you get a winning combination
 			if (array.indexOf(winningCombinations[i][0]) > -1 && array.indexOf(winningCombinations[i][1]) > -1 && array.indexOf(winningCombinations[i][2]) > -1) {
-				$('.board').hide();
-				// Show finish menu
-				$('#finish').show();
-				$('.message').html('Winner');
-				if (array === oMoves) {
-					$('#finish').addClass('screen-win-one');
-					$('#finish').removeClass('screen-win-two');
-					$('#finish').removeClass('screen-win-tie');
-				} else if (array === xMoves) {
-					$('#finish').addClass('screen-win-two');
-					$('#finish').removeClass('screen-win-one');
-					$('#finish').removeClass('screen-win-tie')
-				}
+				winner = true;
 			}
 		}
+		if (winner) {
+			showWinner(array);
+		} else if (!winner && turn === 10) {
+			showTie();
+		}
+	}
+
+	function showWinner(array) {
+		$('.board').hide();
+		// Show finish menu
+		$('#finish').show();
+		$('.message').html('Winner');
+		if (array === oMoves) {
+			$('#finish').addClass('screen-win-one');
+			$('#finish').removeClass('screen-win-two');
+			$('#finish').removeClass('screen-win-tie');
+		} else if (array === xMoves) {
+			$('#finish').addClass('screen-win-two');
+			$('#finish').removeClass('screen-win-one');
+			$('#finish').removeClass('screen-win-tie')
+		}
+	}
+
+	function showTie() {
+		$('.board').hide();
+		$('#finish').show();
+		$('#finish').addClass('screen-win-tie');
+		$('#finish').removeClass('screen-win-one');
+		$('#finish').removeClass('screen-win-two')
+		$('.message').html("It's a Tie!");
 	}
 
 })();
