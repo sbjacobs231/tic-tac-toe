@@ -137,9 +137,7 @@
 					$('#finish').removeClass('screen-win-tie')
 				}
 			}
-			
 		}
-		
 	}
 
 })();
